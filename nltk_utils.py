@@ -2,6 +2,7 @@
     This module...
 '''
 
+import numpy as np
 import nltk
 from nltk.stem.porter import PorterStemmer
 
@@ -29,14 +30,31 @@ def stem(word):
 
 
 def bag_of_words(tokenized_sentence, all_words):
-    pass
+    '''
+        sentence = ["hello", "how", "are", "you"]
+        words = ["hi", "hello", "I", "you", "bye", "thank", "cool"]
+        bag   = [ 0,      1,     0,    1,     0,      0,       0 ]
+    '''
+    tokenized_sentence = [stem(w) for w in tokenized_sentence]
+    bag = np.zeros(len(all_words), dtype=np.float32)
+
+    for index, word in enumerate(all_words):
+        if word in tokenized_sentence:
+            bag[index] = 1.0
+
+    return bag
 
 
-s = "How long does shipping take?"
-print(s)
-s = tokenize(s)
-print(s)
+# s = ["hello", "how", "are", "you"]
+# w = ["hi", "hello", "I", "you", "bye", "thank", "cool"]
+# bag = bag_of_words(s, w)
+# print(bag)  # [0. 1. 0. 1. 0. 0. 0.]
 
-words = ["organize", "organizes", "organizing"]
-stemmed_words = [stem(w) for w in words]
-print(stemmed_words)
+# s = "How long does shipping take?"
+# print(s)
+# s = tokenize(s)
+# print(s)
+
+# words = ["organize", "organizes", "organizing"]
+# stemmed_words = [stem(w) for w in words]
+# print(stemmed_words)
