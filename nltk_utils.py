@@ -36,3 +36,7 @@ s = "How long does shipping take?"
 print(s)
 s = tokenize(s)
 print(s)
+
+words = ["organize", "organizes", "organizing"]
+stemmed_words = [stem(w) for w in words]
+print(stemmed_words)
